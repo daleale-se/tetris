@@ -1,12 +1,23 @@
 package classes.game.tetrominoes;
 
+import classes.game.Cell;
+
+import java.util.ArrayList;
+
 public class Shape {
 
     private int[][] shape;
-    private char name;
 
-    public Shape(char name, int[][] shape) {
-        this.name = name;
+    public Shape(int[][] shape) {
         this.shape = shape;
     }
+
+    public void putOnGrid(ArrayList<ArrayList<Cell>> grid, Position position) {
+        position.putOnGrid(grid, this.shape);
+    }
+
+    public void deleteFromGrid(ArrayList<ArrayList<Cell>> grid, Position position) {
+        position.deleteFromGrid(grid, this.shape);
+    }
+
 }

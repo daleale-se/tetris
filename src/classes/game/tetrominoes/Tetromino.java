@@ -1,5 +1,9 @@
 package classes.game.tetrominoes;
 
+import classes.game.Cell;
+
+import java.util.ArrayList;
+
 public class Tetromino implements TetrominoInterface{
 
     private Position position;
@@ -19,7 +23,7 @@ public class Tetromino implements TetrominoInterface{
 
     @Override
     public void drop() {
-
+        this.position.drop();
     }
 
     @Override
@@ -31,4 +35,13 @@ public class Tetromino implements TetrominoInterface{
     public void goRight() {
 
     }
+
+    public void putOnGrid(ArrayList<ArrayList<Cell>> grid) {
+        this.shape.putOnGrid(grid, this.position);
+    }
+
+    public void deleteFromGrid(ArrayList<ArrayList<Cell>> grid) {
+        this.shape.deleteFromGrid(grid, this.position);
+    }
+
 }

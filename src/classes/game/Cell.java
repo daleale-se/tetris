@@ -1,14 +1,22 @@
 package classes.game;
 
-public class Cell {
-    private boolean isEmpty = true;
-    private int[] position;
+import classes.game.tetrominoes.Position;
 
-    Cell(int[] position) {
+public class Cell {
+
+    private int content = 0;
+    private Position position;
+
+    Cell(Position position) {
         this.position = position;
     }
 
-    public void changeState() {
-        this.isEmpty = !this.isEmpty;
+    public void changeContent(int content) {
+        this.content = content;
     }
+
+    public void printContent() {
+        System.out.print(content);
+    }
+
 }
