@@ -20,4 +20,12 @@ public class Shape {
         position.deleteFromGrid(grid, this.shape);
     }
 
+    public boolean mustStop(ArrayList<ArrayList<Cell>> grid, Position position) {
+        return position.mustStop(grid, this.shape);
+    }
+
+    public void rotateLeft() {
+
+    }
+
 }

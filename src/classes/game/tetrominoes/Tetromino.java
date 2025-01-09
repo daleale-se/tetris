@@ -7,12 +7,10 @@ import java.util.ArrayList;
 public class Tetromino implements TetrominoInterface{
 
     private Position position;
-    private String color;
     private Shape shape;
 
-    public Tetromino(Position position, String color, Shape shape) {
+    public Tetromino(Position position, Shape shape) {
         this.position = position;
-        this.color = color;
         this.shape = shape;
     }
 
@@ -23,17 +21,17 @@ public class Tetromino implements TetrominoInterface{
 
     @Override
     public void drop() {
-        this.position.drop();
+        this.position.addOneToY();
     }
 
     @Override
     public void goLeft() {
-
+        this.position.subtractOneToX();
     }
 
     @Override
     public void goRight() {
-
+        this.position.addOneToX();
     }
 
     public void putOnGrid(ArrayList<ArrayList<Cell>> grid) {
@@ -42,6 +40,10 @@ public class Tetromino implements TetrominoInterface{
 
     public void deleteFromGrid(ArrayList<ArrayList<Cell>> grid) {
         this.shape.deleteFromGrid(grid, this.position);
+    }
+
+    public boolean mustStop(ArrayList<ArrayList<Cell>> grid) {
+        return this.shape.mustStop(grid, this.position);
     }
 
 }

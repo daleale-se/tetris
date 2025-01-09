@@ -19,7 +19,9 @@ public class Position {
             if (this.y - i >= 0) {
                 for (int j = 0; j < shape[0].length; ++j) {
                     Cell cell = grid.get(y - i).get(x + j);
-                    cell.changeContent(shape[shape.length - 1 - i][j]);
+                    if (shape[shape.length - 1 - i][j] != 0) {
+                        cell.changeContent(shape[shape.length - 1 - i][j]);
+                    }
                 }
             }
         }
@@ -36,7 +38,36 @@ public class Position {
         }
     }
 
-    public void drop() {
+    public void addOneToY() {
         this.y++;
     }
+
+    public void addOneToX() {
+        this.x++;
+    }
+
+    public void subtractOneToX() {
+        this.x--;
+    }
+
+    public boolean mustStop(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
+
+        if (this.y + 1 >= grid.toArray().length) {
+            return true;
+        }
+
+        for (int i = 0; i < shape[0].length; ++i) {
+            for (int j = 0; j < shape.length; ++j) {
+                if (shape[shape.length - 1 - j][i] != 0) {
+                    if (this.y - j + 1 >= 0 && grid.get(this.y - j + 1).get(this.x + i).isOccupied()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
 }

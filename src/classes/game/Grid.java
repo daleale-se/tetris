@@ -21,7 +21,7 @@ public class Grid {
         for (int i = 0; i < size[1]; ++i) {
             ArrayList<Cell> row = new ArrayList<>();
             for (int j = 0; j < size[0]; ++j) {
-                Cell cell = new Cell(new Position(new int[]{j, i}));
+                Cell cell = new Cell();
                 row.add(cell);
             }
             aux.add(row);
@@ -34,7 +34,9 @@ public class Grid {
     }
 
     public void dropTetromino() {
-        this.currentTetromino.drop();
+        if (!tetronominoMustStop()) {
+            this.currentTetromino.drop();
+        }
     }
 
     public void updateTetromino() {
@@ -43,6 +45,18 @@ public class Grid {
 
     public void deleteTetromino() {
         this.currentTetromino.deleteFromGrid(this.grid);
+    }
+
+    public void moveTetronominoToLeft() {
+        this.currentTetromino.goLeft();
+    }
+
+    public void moveTetronominoToRight() {
+        this.currentTetromino.goRight();
+    }
+
+    private boolean tetronominoMustStop() {
+        return this.currentTetromino.mustStop(this.grid);
     }
 
     public void printGrid() {
