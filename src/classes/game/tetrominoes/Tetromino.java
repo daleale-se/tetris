@@ -46,4 +46,12 @@ public class Tetromino implements TetrominoInterface{
         return this.shape.mustStop(grid, this.position);
     }
 
+    public boolean collideByLeft(ArrayList<ArrayList<Cell>> grid) {
+        return this.shape.collideByLeft(grid, this.position);
+    }
+
+    public boolean collideByRight(ArrayList<ArrayList<Cell>> grid) {
+        return this.shape.collideByRight(grid, this.position);
+    }
+
 }

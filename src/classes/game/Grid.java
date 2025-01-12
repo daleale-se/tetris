@@ -34,7 +34,7 @@ public class Grid {
     }
 
     public void dropTetromino() {
-        if (!tetronominoMustStop()) {
+        if (!this.tetronominoMustStop()) {
             this.currentTetromino.drop();
         }
     }
@@ -48,15 +48,27 @@ public class Grid {
     }
 
     public void moveTetronominoToLeft() {
-        this.currentTetromino.goLeft();
+        if (!this.collideByLeft()) {
+            this.currentTetromino.goLeft();
+        }
     }
 
     public void moveTetronominoToRight() {
-        this.currentTetromino.goRight();
+        if (!this.collideByRight()) {
+            this.currentTetromino.goRight();
+        }
     }
 
     private boolean tetronominoMustStop() {
         return this.currentTetromino.mustStop(this.grid);
+    }
+
+    private boolean collideByLeft() {
+        return this.currentTetromino.collideByLeft(this.grid);
+    }
+
+    private boolean collideByRight() {
+        return this.currentTetromino.collideByRight(this.grid);
     }
 
     public void printGrid() {

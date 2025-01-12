@@ -24,6 +24,14 @@ public class Shape {
         return position.mustStop(grid, this.shape);
     }
 
+    public boolean collideByLeft(ArrayList<ArrayList<Cell>> grid, Position position) {
+        return position.collideByLeft(grid, this.shape);
+    }
+
+    public boolean collideByRight(ArrayList<ArrayList<Cell>> grid, Position position) {
+        return position.collideByRight(grid, this.shape);
+    }
+
     public void rotateLeft() {
 
     }

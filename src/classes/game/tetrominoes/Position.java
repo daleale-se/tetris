@@ -70,4 +70,44 @@ public class Position {
 
     }
 
+    public boolean collideByLeft(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
+
+        if (this.x - 1 < 0){
+            return true;
+        }
+
+        for (int i = 0; i < shape.length; ++i) {
+            for (int j = 0; j < shape[0].length; ++j) {
+                if (shape[i][j] != 0) {
+                    if (this.y - shape.length + 1 + i >= 0 && grid.get(this.y - shape.length + 1 + i).get(this.x + j).isOccupied()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    public boolean collideByRight(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
+
+        if (this.x + shape[0].length > grid.get(0).toArray().length - 1){
+            return true;
+        }
+
+        for (int i = 0; i < shape.length; ++i) {
+            for (int j = 0; j < shape[0].length; ++j) {
+                if (shape[i][shape[0].length - 1 - j] != 0) {
+                    if (this.y - shape.length + 1 + i >= 0 && grid.get(this.y - shape.length + 1 + i).get(this.x + shape[0].length - 1 - j).isOccupied()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+
+    }
+
 }
