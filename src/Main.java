@@ -96,7 +96,6 @@ public class Main extends JFrame implements KeyListener {
             public void run() {
                 grid.updateTetromino();
                 grid.printGrid();
-                grid.deleteTetromino();
                 grid.dropTetromino();
                 System.out.println();
             }
