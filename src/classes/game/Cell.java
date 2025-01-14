@@ -21,4 +21,8 @@ public class Cell {
         return content != 0;
     }
 
+    public String getContent() {
+        return Integer.toString(this.content);
+    }
+
 }

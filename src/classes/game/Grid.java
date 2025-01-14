@@ -99,4 +99,16 @@ public class Grid {
         }
     }
 
+    public String getGridRepresentation() {
+        StringBuilder representation = new StringBuilder();
+        for (ArrayList<Cell> row : this.grid) {
+            for (Cell cell : row) {
+                representation.append(cell.getContent()); // Assuming Cell has a getContent() method
+            }
+            representation.append("\n");
+        }
+        return representation.toString();
+    }
+
+
 }
