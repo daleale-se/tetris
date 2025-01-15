@@ -22,15 +22,19 @@ public class Grid {
     public Tetromino randomTetronomino() {
         ArrayList<Shape> shapes = new ArrayList<>();
         shapes.add(new Shape(new int[][]{{1, 1}, {1, 1}}));
-        shapes.add(new Shape(new int[][]{{2, 0}, {2, 0}, {2, 2}}));
-        shapes.add(new Shape(new int[][]{{3, 0}, {3, 3}, {3, 0}}));
-        shapes.add(new Shape(new int[][]{{4, 0}, {4, 4}, {0, 4}}));
-        shapes.add(new Shape(new int[][]{{0, 5}, {5, 5}, {5, 0}}));
-        shapes.add(new Shape(new int[][]{{0, 6}, {0, 6}, {6, 6}}));
-        shapes.add(new Shape(new int[][]{{7, 0}, {7, 0}, {7, 0},{7, 0}}));
+        shapes.add(new Shape(new int[][]{{0, 0, 2}, {2, 2, 2}}));
+        shapes.add(new Shape(new int[][]{{0, 3, 0}, {3, 3, 3}}));
+        shapes.add(new Shape(new int[][]{{0, 4, 4}, {4, 4, 0}}));
+        shapes.add(new Shape(new int[][]{{5, 5, 0}, {0, 5, 5}}));
+        shapes.add(new Shape(new int[][]{{6, 6, 6}, {0, 0, 6}}));
+        shapes.add(new Shape(new int[][]{{7, 7, 7, 7}}));
 
         int randomIndex = new Random().nextInt(shapes.size());
         return new Tetromino(new Position(new int[]{6, 0}), shapes.get(randomIndex));
+    }
+
+    public void rotateTetronomino() {
+        this.currentTetromino.rotateRight();
     }
 
     private ArrayList<ArrayList<Cell>> generateGrid() {
@@ -66,10 +70,6 @@ public class Grid {
         if (!this.tetronominoMustStop()) {
             this.currentTetromino.deleteFromGrid(this.grid);
         }
-    }
-
-    public void insertRandomTetronomino() {
-        this.currentTetromino = this.randomTetronomino();
     }
 
     public void moveTetronominoToLeft() {

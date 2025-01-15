@@ -32,8 +32,16 @@ public class Shape {
         return position.collideByRight(grid, this.shape);
     }
 
-    public void rotateLeft() {
-
+    public void rotateRight() {
+        int width = this.shape[0].length;
+        int height = this.shape.length;
+        int[][] rotatedShape = new int[width][height];
+        for (int i = 0; i < height; ++i) {
+            for (int j = 0; j < width; ++j) {
+                rotatedShape[j][height - 1 - i] = this.shape[i][j];
+            }
+        }
+        this.shape = rotatedShape;
     }
 
 }

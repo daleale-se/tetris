@@ -29,7 +29,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1500), e -> {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e -> {
             grid.updateTetromino();
             updateGridDisplay();
             grid.deleteTetromino();
@@ -60,8 +60,7 @@ public class Main extends Application {
                     break;
                 case UP:
                     grid.deleteTetromino();
-                    // Add a method to rotate the Tetromino
-                    // grid.rotateTetromino();
+                    grid.rotateTetronomino();
                     grid.updateTetromino();
                     updateGridDisplay();
                     break;

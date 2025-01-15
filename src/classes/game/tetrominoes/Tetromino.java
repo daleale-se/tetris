@@ -14,9 +14,8 @@ public class Tetromino implements TetrominoInterface{
         this.shape = shape;
     }
 
-    @Override
-    public void rotateLeft() {
-
+    public void rotateRight() {
+        this.shape.rotateRight();
     }
 
     @Override

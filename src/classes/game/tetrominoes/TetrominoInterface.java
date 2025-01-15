@@ -2,7 +2,7 @@ package classes.game.tetrominoes;
 
 public interface TetrominoInterface {
 
-    void rotateLeft();
+    void rotateRight();
     void drop();
     void goLeft();
     void goRight();
