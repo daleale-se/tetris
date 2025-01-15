@@ -16,6 +16,7 @@ public class Grid {
 
     public Grid() {
         this.grid = this.generateGrid();
+        this.currentTetromino = this.randomTetronomino();
     }
 
     public Tetromino randomTetronomino() {
@@ -50,11 +51,10 @@ public class Grid {
     }
 
     public void dropTetromino() {
-        if (!this.tetronominoMustStop()) {
-            this.deleteTetromino();
-            this.currentTetromino.drop();
-        } else {
+        if (this.tetronominoMustStop()) {
             this.currentTetromino = this.randomTetronomino();
+        } else {
+            this.currentTetromino.drop();
         }
     }
 
@@ -63,7 +63,13 @@ public class Grid {
     }
 
     public void deleteTetromino() {
-        this.currentTetromino.deleteFromGrid(this.grid);
+        if (!this.tetronominoMustStop()) {
+            this.currentTetromino.deleteFromGrid(this.grid);
+        }
+    }
+
+    public void insertRandomTetronomino() {
+        this.currentTetromino = this.randomTetronomino();
     }
 
     public void moveTetronominoToLeft() {
@@ -78,7 +84,7 @@ public class Grid {
         }
     }
 
-    private boolean tetronominoMustStop() {
+    public boolean tetronominoMustStop() {
         return this.currentTetromino.mustStop(this.grid);
     }
 
@@ -109,6 +115,5 @@ public class Grid {
         }
         return representation.toString();
     }
-
 
 }

@@ -50,9 +50,10 @@ public class Position {
         this.x--;
     }
 
+
     public boolean mustStop(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
 
-        if (this.y + 1 >= grid.toArray().length) {
+        if (this.y + 1 >= grid.size()) {
             return true;
         }
 
@@ -62,12 +63,12 @@ public class Position {
                     if (this.y - j + 1 >= 0 && grid.get(this.y - j + 1).get(this.x + i).isOccupied()) {
                         return true;
                     }
+                    break;
                 }
             }
         }
 
         return false;
-
     }
 
     public boolean collideByLeft(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
