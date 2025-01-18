@@ -50,10 +50,6 @@ public class Grid {
         return aux;
     }
 
-    public void insertTetromino(Tetromino tetromino) {
-        this.currentTetromino = tetromino;
-    }
-
     public void dropTetromino() {
         if (this.tetronominoMustStop()) {
             this.currentTetromino = this.randomTetronomino();
@@ -94,15 +90,6 @@ public class Grid {
 
     private boolean collideByRight() {
         return this.currentTetromino.collideByRight(this.grid);
-    }
-
-    public void printGrid() {
-        for (ArrayList<Cell> row : this.grid) {
-            for (Cell cell : row) {
-                cell.printContent();
-            }
-            System.out.println();
-        }
     }
 
     public String getGridRepresentation() {

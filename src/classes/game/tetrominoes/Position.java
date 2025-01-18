@@ -87,6 +87,7 @@ public class Position {
                     if (checkY >= 0 && grid.get(checkY).get(checkX).isOccupied()) {
                         return true;
                     }
+                    break;
                 }
             }
         }
@@ -109,6 +110,7 @@ public class Position {
                     if (checkY >= 0 && grid.get(checkY).get(this.x + checkX).isOccupied()) {
                         return true;
                     }
+                    break;
                 }
             }
         }

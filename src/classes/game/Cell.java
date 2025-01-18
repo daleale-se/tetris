@@ -8,10 +8,6 @@ public class Cell {
         this.content = content;
     }
 
-    public void printContent() {
-        System.out.print(content);
-    }
-
     public boolean isOccupied() {
         return content != 0;
     }
