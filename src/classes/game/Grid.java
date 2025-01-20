@@ -11,8 +11,7 @@ public class Grid {
 
     private final ArrayList<ArrayList<Cell>> grid;
     private Tetromino currentTetromino;
-    private int speed;
-    private final int[] size = {14, 16};
+    private final int[] size = {10, 20};
 
     public Grid() {
         this.grid = this.generateGrid();
@@ -30,7 +29,7 @@ public class Grid {
         shapes.add(new Shape(new int[][]{{7, 7, 7, 7}}));
 
         int randomIndex = new Random().nextInt(shapes.size());
-        return new Tetromino(new Position(new int[]{6, 0}), shapes.get(randomIndex));
+        return new Tetromino(new Position(new int[]{4, 0}), shapes.get(randomIndex));
     }
 
     public void rotateTetronomino() {
@@ -68,6 +67,10 @@ public class Grid {
         }
     }
 
+    public void deleteTetrominoTwo() {
+        this.currentTetromino.deleteFromGrid(this.grid);
+    }
+
     public void moveTetronominoToLeft() {
         if (!this.collideByLeft()) {
             this.currentTetromino.goLeft();
@@ -92,15 +95,8 @@ public class Grid {
         return this.currentTetromino.collideByRight(this.grid);
     }
 
-    public String getGridRepresentation() {
-        StringBuilder representation = new StringBuilder();
-        for (ArrayList<Cell> row : this.grid) {
-            for (Cell cell : row) {
-                representation.append(cell.getContent()); // Assuming Cell has a getContent() method
-            }
-            representation.append("\n");
-        }
-        return representation.toString();
+    public ArrayList<ArrayList<Cell>> getGridArray() {
+        return this.grid;
     }
 
 }

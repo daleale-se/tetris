@@ -84,7 +84,7 @@ public class Position {
                 int checkY = this.y - shape.length + 1 + i;
                 int checkX = this.x + j;
                 if (shape[i][j] != 0) {
-                    if (checkY >= 0 && grid.get(checkY).get(checkX).isOccupied()) {
+                    if (checkY >= 0 && grid.get(checkY).get(checkX - 1).isOccupied()) {
                         return true;
                     }
                     break;
@@ -107,7 +107,7 @@ public class Position {
                 int checkY = this.y - shape.length + 1 + i;
                 int checkX = shape[0].length - 1 - j;
                 if (shape[i][checkX] != 0) {
-                    if (checkY >= 0 && grid.get(checkY).get(this.x + checkX).isOccupied()) {
+                    if (checkY >= 0 && grid.get(checkY).get(this.x + checkX + 1).isOccupied()) {
                         return true;
                     }
                     break;
