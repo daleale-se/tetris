@@ -53,4 +53,8 @@ public class Tetromino implements TetrominoInterface{
         return this.shape.collideByRight(grid, this.position);
     }
 
+    public boolean canRotate(ArrayList<ArrayList<Cell>> grid) {
+        return this.shape.canRotate(grid, this.position);
+    }
+
 }

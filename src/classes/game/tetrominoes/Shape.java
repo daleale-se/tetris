@@ -33,6 +33,10 @@ public class Shape {
     }
 
     public void rotateRight() {
+        this.shape = this.getRotatedShape();
+    }
+
+    public int[][] getRotatedShape() {
         int width = this.shape[0].length;
         int height = this.shape.length;
         int[][] rotatedShape = new int[width][height];
@@ -41,7 +45,25 @@ public class Shape {
                 rotatedShape[j][height - 1 - i] = this.shape[i][j];
             }
         }
-        this.shape = rotatedShape;
+        return rotatedShape;
+    }
+
+    public boolean canRotate(ArrayList<ArrayList<Cell>> grid, Position position) {
+        int[][] rotatedShape = this.getRotatedShape();
+        return position.canRotate(grid, rotatedShape);
+
+        /*int sizeExceed = position.calculateSizeExceed(this.shape.length, gridWidth);
+
+        if (sizeExceed > 0 && position.canMoveNToLeft(rotatedShape, sizeExceed, grid)) {
+            position.changeX(sizeExceed);
+            return true;
+        }
+
+        if (position.rotatedShapeCollide(rotatedShape, grid)) {
+            int exceed = position.calculateSizeExceed(this.shape.length, gridWidth);
+        }
+
+        return false; */
     }
 
 }

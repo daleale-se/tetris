@@ -30,9 +30,9 @@ public class Position {
         for (int i = 0; i < shape.length; ++i) {
             if (this.y - i >= 0) {
                 for (int j = 0; j < shape[0].length; ++j) {
-                    Cell cell = grid.get(y - i).get(x + j);
+                    Cell cell = grid.get(this.y - i).get(this.x + j);
                     int yTarget = shape.length - 1 - i;
-                    if (shape[yTarget][j] != 0) {
+                    if (shape[yTarget][j] != 0 && !cell.isOccupied()) {
                         cell.changeContent(shape[yTarget][j]);
                     }
                 }
@@ -45,7 +45,10 @@ public class Position {
             if (this.y - i >= 0) {
                 for (int j = 0; j < shape[0].length; ++j) {
                     Cell cell = grid.get(y - i).get(x + j);
-                    cell.changeContent(0);
+                    int yTarget = shape.length - 1 - i;
+                    if (shape[yTarget][j] != 0 && cell.isOccupied()) {
+                        cell.changeContent(0);
+                    }
                 }
             }
         }
@@ -117,6 +120,39 @@ public class Position {
 
         return false;
 
+    }
+
+    /*public int calculateSizeExceed(int shapeLength, int gridWidth) {
+        return this.x + shapeLength - gridWidth;
+    }
+
+    public boolean canMoveNToLeft(int[][] rotatedShape, int sizeExceed, ArrayList<ArrayList<Cell>> grid) {
+
+        int newPosX = this.x - sizeExceed;
+        for (int i = 0; i < rotatedShape.length; ++i) {
+            if (this.y - i >= 0) {
+                for (int j = 0; j < rotatedShape[0].length; ++j) {
+                    Cell cell = grid.get(this.y - i).get(newPosX + j);
+                    if (rotatedShape[rotatedShape.length - i][j] > 0 && cell.isOccupied()) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void changeX(int sizeExceed) {
+        this.x -= sizeExceed;
+    }
+
+    public boolean rotatedShapeCollide(int[][] rotatedShape, ArrayList<ArrayList<Cell>> grid) {
+
+    }*/
+
+    public boolean canRotate(ArrayList<ArrayList<Cell>> grid, int[][] rotatedShape) {
+        return true;
     }
 
 }

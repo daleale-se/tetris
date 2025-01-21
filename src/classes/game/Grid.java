@@ -33,7 +33,9 @@ public class Grid {
     }
 
     public void rotateTetronomino() {
-        this.currentTetromino.rotateRight();
+        if (this.currentTetromino.canRotate(grid)) {
+            this.currentTetromino.rotateRight();
+        }
     }
 
     private ArrayList<ArrayList<Cell>> generateGrid() {
