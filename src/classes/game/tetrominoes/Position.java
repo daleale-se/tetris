@@ -122,18 +122,14 @@ public class Position {
 
     }
 
-    /*public int calculateSizeExceed(int shapeLength, int gridWidth) {
-        return this.x + shapeLength - gridWidth;
-    }
+    public boolean canMoveExceedToLeft(int[][] rotatedShape, int exceed, ArrayList<ArrayList<Cell>> grid) {
 
-    public boolean canMoveNToLeft(int[][] rotatedShape, int sizeExceed, ArrayList<ArrayList<Cell>> grid) {
-
-        int newPosX = this.x - sizeExceed;
+        int newPosX = this.x - exceed;
         for (int i = 0; i < rotatedShape.length; ++i) {
             if (this.y - i >= 0) {
                 for (int j = 0; j < rotatedShape[0].length; ++j) {
                     Cell cell = grid.get(this.y - i).get(newPosX + j);
-                    if (rotatedShape[rotatedShape.length - i][j] > 0 && cell.isOccupied()) {
+                    if (rotatedShape[rotatedShape.length - 1 - i][j] > 0 && cell.isOccupied()) {
                         return false;
                     }
                 }
@@ -143,16 +139,49 @@ public class Position {
         return true;
     }
 
-    public void changeX(int sizeExceed) {
-        this.x -= sizeExceed;
+    public int rotateShapeCollideFromRight(int[][] rotatedShape, ArrayList<ArrayList<Cell>> grid) {
+
+        for (int i = 0; i < rotatedShape.length; ++i) {
+            if (this.y - i >= 0) {
+                for (int j = 0; j < rotatedShape[0].length; ++j) {
+                    Cell cell = grid.get(this.y - i).get(this.x + rotatedShape[0].length - 1 - j);
+                    if (rotatedShape[rotatedShape.length - 1 - i][rotatedShape[0].length - 1 - j] > 0 && cell.isOccupied()) {
+                        return this.x + rotatedShape[0].length - 1 - j;
+                    }
+                }
+            }
+        }
+
+        return -1;
+
     }
 
-    public boolean rotatedShapeCollide(int[][] rotatedShape, ArrayList<ArrayList<Cell>> grid) {
-
-    }*/
 
     public boolean canRotate(ArrayList<ArrayList<Cell>> grid, int[][] rotatedShape) {
-        return true;
+
+        int exceedRightWall = this.x + rotatedShape[0].length - grid.getFirst().size();
+
+        if (exceedRightWall > 0 && this.canMoveExceedToLeft(rotatedShape, exceedRightWall, grid)) {
+            this.x -= exceedRightWall;
+            return true;
+        }
+
+        int rotatedShapeCollitionRight = this.rotateShapeCollideFromRight(rotatedShape, grid);
+
+        int exceedRightShape = 0;
+
+        if (rotatedShapeCollitionRight > 0) {
+            exceedRightShape = this.x + rotatedShape[0].length - rotatedShapeCollitionRight;
+        }
+
+        if (exceedRightShape > 0 && this.canMoveExceedToLeft(rotatedShape, exceedRightShape, grid)) {
+            this.x -= exceedRightShape;
+            return true;
+        } else if (rotatedShapeCollitionRight == -1) {
+            return true;
+        }
+
+        return false;
     }
 
 }

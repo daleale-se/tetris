@@ -51,19 +51,6 @@ public class Shape {
     public boolean canRotate(ArrayList<ArrayList<Cell>> grid, Position position) {
         int[][] rotatedShape = this.getRotatedShape();
         return position.canRotate(grid, rotatedShape);
-
-        /*int sizeExceed = position.calculateSizeExceed(this.shape.length, gridWidth);
-
-        if (sizeExceed > 0 && position.canMoveNToLeft(rotatedShape, sizeExceed, grid)) {
-            position.changeX(sizeExceed);
-            return true;
-        }
-
-        if (position.rotatedShapeCollide(rotatedShape, grid)) {
-            int exceed = position.calculateSizeExceed(this.shape.length, gridWidth);
-        }
-
-        return false; */
     }
 
 }

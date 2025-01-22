@@ -18,6 +18,7 @@ public class Game extends Application {
     private GridPane gridPane;
     private static final int CELL_SIZE = 30;
     private boolean isDropping = false;
+    private boolean isPaused = false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -51,30 +52,44 @@ public class Game extends Application {
         scene.setOnKeyPressed(event -> {
             switch (event.getCode()) {
                 case DOWN:
-                    if (!isDropping) {
+                    if (!isDropping && !isPaused) {
                         isDropping = true;
                         processDrop();
                         isDropping = false;
                     }
                     break;
                 case LEFT:
-                    grid.deleteTetrominoTwo();
-                    grid.moveTetronominoToLeft();
-                    grid.updateTetromino();
-                    displayGrid();
+                    if (!isPaused) {
+                        grid.deleteTetrominoTwo();
+                        grid.moveTetronominoToLeft();
+                        grid.updateTetromino();
+                        displayGrid();
+                    }
                     break;
                 case RIGHT:
-                    grid.deleteTetrominoTwo();
-                    grid.moveTetronominoToRight();
-                    grid.updateTetromino();
-                    displayGrid();
+                    if (!isPaused) {
+                        grid.deleteTetrominoTwo();
+                        grid.moveTetronominoToRight();
+                        grid.updateTetromino();
+                        displayGrid();
+                    }
                     break;
                 case UP:
-                    grid.deleteTetromino();
-                    grid.rotateTetronomino();
-                    grid.updateTetromino();
-                    displayGrid();
+                    if (!isPaused) {
+                        grid.deleteTetromino();
+                        grid.rotateTetronomino();
+                        grid.updateTetromino();
+                        displayGrid();
+                    }
                     break;
+                case SPACE:
+                    if (isPaused) {
+                        timeline.play();
+                        this.isPaused = false;
+                    } else {
+                        timeline.stop();
+                        this.isPaused = true;
+                    }
             }
         });
     }
