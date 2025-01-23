@@ -83,6 +83,15 @@ public class Game extends Application {
                     }
                     break;
                 case SPACE:
+                    if (!isPaused) {
+                        grid.deleteTetromino();
+                        grid.instantDrop();
+                        grid.updateTetromino();
+                        grid.dropTetromino();
+                        displayGrid();
+                    }
+                    break;
+                case P:
                     if (isPaused) {
                         timeline.play();
                         this.isPaused = false;

@@ -57,4 +57,8 @@ public class Tetromino implements TetrominoInterface{
         return this.shape.canRotate(grid, this.position);
     }
 
+    public void instantDrop(ArrayList<ArrayList<Cell>> grid) {
+        this.shape.instantDrop(grid, this.position);
+    }
+
 }

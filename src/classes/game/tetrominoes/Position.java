@@ -76,6 +76,29 @@ public class Position {
         return false;
     }
 
+    public boolean mustStopWithY(ArrayList<ArrayList<Cell>> grid, int[][] shape, int posY) {
+
+        if (posY + 1 >= grid.size()) {
+            return true;
+        }
+
+        for (int i = 0; i < shape[0].length; ++i) {
+            for (int j = 0; j < shape.length; ++j) {
+                if (shape[shape.length - 1 - j][i] != 0) {
+                    int nextY = posY - j + 1;
+                    int nextX = this.x + i;
+
+                    if (nextY >= 0 && grid.get(nextY).get(nextX).isOccupied()) {
+                        return true;
+                    }
+                    break;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public boolean collideByLeft(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
 
         if (this.x - 1 < 0){
@@ -182,6 +205,15 @@ public class Position {
         }
 
         return false;
+    }
+
+    public void instantDrop(ArrayList<ArrayList<Cell>> grid, int[][] shape) {
+        for (int i = this.y; i < grid.size(); ++i) {
+            if (mustStopWithY(grid, shape, i)) {
+                this.y = i;
+                return;
+            }
+        }
     }
 
 }

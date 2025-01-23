@@ -101,4 +101,8 @@ public class Grid {
         return this.grid;
     }
 
+    public void instantDrop() {
+        this.currentTetromino.instantDrop(this.grid);
+    }
+
 }

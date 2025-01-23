@@ -53,4 +53,8 @@ public class Shape {
         return position.canRotate(grid, rotatedShape);
     }
 
+    public void instantDrop(ArrayList<ArrayList<Cell>> grid, Position position) {
+        position.instantDrop(grid, this.shape);
+    }
+
 }
