@@ -53,6 +53,7 @@ public class Grid {
 
     public void dropTetromino() {
         if (this.tetronominoMustStop()) {
+            this.checkCompletedRows();
             this.currentTetromino = this.randomTetronomino();
         } else {
             this.currentTetromino.drop();
@@ -103,6 +104,42 @@ public class Grid {
 
     public void instantDrop() {
         this.currentTetromino.instantDrop(this.grid);
+    }
+
+    public boolean filledRow(ArrayList<Cell> row) {
+        for (Cell cell : row) {
+            if (!cell.isOccupied()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public ArrayList<Cell> generateEmptyRow() {
+        ArrayList<Cell> row = new ArrayList<>();
+        for (int j = 0; j < size[0]; ++j) {
+            Cell cell = new Cell();
+            row.add(cell);
+        }
+        return row;
+    }
+
+    public void checkCompletedRows() {
+        ArrayList<Integer> deleteIndexes = new ArrayList<>();
+        for (int i = grid.size() - 1; i >= 0; --i) {
+            if (this.filledRow(grid.get(i))) {
+                deleteIndexes.add(i);
+            }
+        }
+
+        for (int index : deleteIndexes) {
+            grid.remove(index);
+        }
+
+        for (int i = 0; i < deleteIndexes.size(); ++i) {
+            grid.addFirst(this.generateEmptyRow());
+        }
     }
 
 }
