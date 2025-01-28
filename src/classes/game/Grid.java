@@ -3,6 +3,10 @@ package classes.game;
 import classes.game.tetrominoes.Position;
 import classes.game.tetrominoes.Shape;
 import classes.game.tetrominoes.Tetromino;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -11,11 +15,28 @@ public class Grid {
 
     private final ArrayList<ArrayList<Cell>> grid;
     private Tetromino currentTetromino;
+    private ArrayList<Tetromino> tetrominos;
     private final int[] size = {10, 20};
+    private static final int CELL_SIZE = 30;
+
 
     public Grid() {
         this.grid = this.generateGrid();
-        this.currentTetromino = this.randomTetronomino();
+        this.tetrominos = this.selectTetronominos();
+        this.currentTetromino = this.getNextTetronomino();
+    }
+
+    private ArrayList<Tetromino> selectTetronominos() {
+        ArrayList<Tetromino> tetrominos = new ArrayList<Tetromino>();
+        tetrominos.add(this.randomTetronomino());
+        tetrominos.add(this.randomTetronomino());
+        return tetrominos;
+    }
+
+    private Tetromino getNextTetronomino() {
+        Tetromino newTetronomino = this.tetrominos.removeFirst();
+        this.tetrominos.add(this.randomTetronomino());
+        return newTetronomino;
     }
 
     public Tetromino randomTetronomino() {
@@ -54,7 +75,7 @@ public class Grid {
     public void dropTetromino() {
         if (this.tetronominoMustStop()) {
             this.checkCompletedRows();
-            this.currentTetromino = this.randomTetronomino();
+            this.currentTetromino = this.getNextTetronomino();
         } else {
             this.currentTetromino.drop();
         }
@@ -140,6 +161,53 @@ public class Grid {
         for (int i = 0; i < deleteIndexes.size(); ++i) {
             grid.addFirst(this.generateEmptyRow());
         }
+    }
+
+    public void displayGrid(GridPane gridPane) {
+        ArrayList<ArrayList<Cell>> gridState = this.getGridArray();
+
+        for (int i = 0; i < gridState.size(); i++) {
+            for (int j = 0; j < gridState.getFirst().size(); j++) {
+                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
+                switch (gridState.get(i).get(j).getContent()) {
+                    case 0:
+                        cell.setFill(Color.WHITE);
+                        cell.setStroke(Color.LIGHTGRAY);
+                        break;
+                    case 1:
+                        cell.setFill(Color.BLUE);
+                        cell.setStroke(Color.BLUE);
+                        break;
+                    case 2:
+                        cell.setFill(Color.RED);
+                        cell.setStroke(Color.RED);
+                        break;
+                    case 3:
+                        cell.setFill(Color.GREEN);
+                        cell.setStroke(Color.GREEN);
+                        break;
+                    case 4:
+                        cell.setFill(Color.YELLOW);
+                        cell.setStroke(Color.YELLOW);
+                        break;
+                    case 5:
+                        cell.setFill(Color.LIGHTBLUE);
+                        cell.setStroke(Color.LIGHTBLUE);
+                        break;
+                    case 6:
+                        cell.setFill(Color.PINK);
+                        cell.setStroke(Color.PINK);
+                        break;
+                    case 7:
+                        cell.setFill(Color.ORANGE);
+                        cell.setStroke(Color.ORANGE);
+                        break;
+                }
+
+                gridPane.add(cell, j, i);
+            }
+        }
+
     }
 
 }

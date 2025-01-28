@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Game extends Application {
     private Grid grid;
     private GridPane gridPane;
-    private static final int CELL_SIZE = 30;
+    private GridPane nextTetrominoes;
     private boolean isDropping = false;
     private boolean isPaused = false;
 
@@ -25,9 +25,13 @@ public class Game extends Application {
         grid = new Grid();
 
         gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
+        // gridPane.setAlignment(Pos.CENTER);
+        nextTetrominoes = new GridPane();
+        // nextTetrominoes.setAlignment(Pos.CENTER_RIGHT);
 
-        BorderPane borderedPane = new BorderPane(gridPane);
+        BorderPane borderedPane = new BorderPane();
+        borderedPane.setCenter(gridPane);
+        borderedPane.setRight(nextTetrominoes);
         borderedPane.setBackground(new Background(new BackgroundFill(
                 Color.BLACK,
                 CornerRadii.EMPTY,
@@ -114,52 +118,16 @@ public class Game extends Application {
         displayGrid();
     }
 
+    private void displayNextTetronominoes() {
+        nextTetrominoes.getChildren().clear();
+
+    }
+
     private void displayGrid() {
 
         gridPane.getChildren().clear();
-        ArrayList<ArrayList<Cell>> gridState = grid.getGridArray();
+        grid.displayGrid(gridPane);
 
-        for (int i = 0; i < gridState.size(); i++) {
-            for (int j = 0; j < gridState.getFirst().size(); j++) {
-                Rectangle cell = new Rectangle(CELL_SIZE, CELL_SIZE);
-                switch (gridState.get(i).get(j).getContent()) {
-                    case 0:
-                        cell.setFill(Color.WHITE);
-                        cell.setStroke(Color.LIGHTGRAY);
-                        break;
-                    case 1:
-                        cell.setFill(Color.BLUE);
-                        cell.setStroke(Color.BLUE);
-                        break;
-                    case 2:
-                        cell.setFill(Color.RED);
-                        cell.setStroke(Color.RED);
-                        break;
-                    case 3:
-                        cell.setFill(Color.GREEN);
-                        cell.setStroke(Color.GREEN);
-                        break;
-                    case 4:
-                        cell.setFill(Color.YELLOW);
-                        cell.setStroke(Color.YELLOW);
-                        break;
-                    case 5:
-                        cell.setFill(Color.LIGHTBLUE);
-                        cell.setStroke(Color.LIGHTBLUE);
-                        break;
-                    case 6:
-                        cell.setFill(Color.PINK);
-                        cell.setStroke(Color.PINK);
-                        break;
-                    case 7:
-                        cell.setFill(Color.ORANGE);
-                        cell.setStroke(Color.ORANGE);
-                        break;
-                }
-
-                gridPane.add(cell, j, i);
-            }
-        }
     }
 
 }
